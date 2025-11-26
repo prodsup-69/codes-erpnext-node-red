@@ -4,6 +4,15 @@ qty = frappe.form_dict.qty
 target_warehouse = None
 is_additional_transfer_entry = False
 
+if work_order_id is None:
+    frappe.throw("No Work Order ID")
+
+if qty is None or qty == 0:
+    frappe.throw("Invalid Qty")
+
+if purpose not in ["Material Transfer for Manufacture", "Manufacture"]:
+    frappe.throw("Invalid Purpose")
+
 work_order = frappe.get_doc("Work Order", work_order_id)
 if not frappe.db.get_value("Warehouse", work_order.wip_warehouse, "is_group"):
     wip_warehouse = work_order.wip_warehouse
@@ -56,7 +65,7 @@ if purpose != "Disassemble":
 
 
 # Save the document to the database
-stock_entry.docstatus = 1
+stock_entry.docstatus = 0
 stock_entry.insert()  # Use insert() for new documents
 # or new_doc.save() if the document already exists and you are updating it
 frappe.db.commit()  # Required if running in a console or external script

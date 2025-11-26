@@ -3,7 +3,7 @@
 - Create Server Script API Endpoint: `make_stock_entry`
 - Access at http://localhost:8001/api/method/make_stock_entry
 
-- Method: POST
+- API Method: `make_stock_entry` (I thought it was `POST`, but it is not.)
 - Header:
 
   - `Content-Type: application/json`
