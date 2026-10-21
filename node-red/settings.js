@@ -55,9 +55,11 @@ module.exports = {
   //userDir: '/home/nol/.node-red/',
 
   /** Node-RED scans the `nodes` directory in the userDir to find local node files.
-   * The following property can be used to specify an additional directory to scan.
+   * The following property can be used to specify one or more additional directories
+   * to scan, as either a single string or an array of strings.
    */
   //nodesDir: '/home/nol/.node-red/nodes',
+  //nodesDir: ['/home/nol/.node-red/nodes', '/home/nol/my-project/nodes'],
 
   /*******************************************************************************
    * Security
@@ -433,7 +435,9 @@ module.exports = {
        * added to the end of the palette.
        * If not set, the following default order is used:
        */
-      //categories: ['subflows', 'common', 'function', 'network', 'sequence', 'parser', 'storage'],
+      //categories: {
+      //     order: ['subflows', 'common', 'function', 'network', 'sequence', 'parser', 'storage'],
+      // },
     },
 
     projects: {
@@ -451,8 +455,12 @@ module.exports = {
     },
 
     codeEditor: {
-      /** Select the text editor component used by the editor.
-       * As of Node-RED V3, this defaults to "monaco", but can be set to "ace" if desired
+      /**
+       * Code Editor Selection can be one of the following:
+       * - monaco - the Monaco Editor (the default)
+       * - ace - the Ace Editor
+       * - basic - a simple textarea based editor
+       * @type {'monaco'|'ace'|'basic'}
        */
       lib: "monaco",
       options: {
@@ -464,7 +472,7 @@ module.exports = {
          */
         // theme: "vs",
         /** other overrides can be set e.g. fontSize, fontFamily, fontLigatures etc.
-         * for the full list, see https://microsoft.github.io/monaco-editor/docs.html#interfaces/editor.IStandaloneEditorConstructionOptions.html
+         * for the full list, see https://microsoft.github.io/monaco-editor/docs.html#interfaces/editor_editor_api.editor.IStandaloneEditorConstructionOptions.html
          */
         //fontSize: 14,
         //fontFamily: "Cascadia Code, Fira Code, Consolas, 'Courier New', monospace",
@@ -620,4 +628,23 @@ module.exports = {
   //    *   - reason: if result is false, the HTTP reason string to return
   //    */
   //},
+
+  /*******************************************************************************
+   * Node Default Overrides
+   *
+   * This allows the user to override default values of a node. These are the values
+   * that are applied when a node is added to the workspace. They do not affect
+   * nodes that have already been deployed.
+   *
+   * The available properties of a node type can be found in the Information sidebar when
+   * selecting a node of that type.
+   *
+   *
+   *******************************************************************************/
+
+  // nodeDefaults: {
+  //     "debug": {
+  //         "complete": true // set the debug node to show complete msg by default
+  //     }
+  // }
 };
